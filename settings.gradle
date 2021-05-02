@@ -1,0 +1,6 @@
+
+
+rootProject.name = 'rvnk'
+include 'rvnk-backend'
+
+ 
