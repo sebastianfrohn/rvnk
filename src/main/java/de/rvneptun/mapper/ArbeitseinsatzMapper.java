@@ -2,15 +2,13 @@ package de.rvneptun.mapper;
 
 import de.rvneptun.dto.ArbeitseinsatzDto;
 import de.rvneptun.entity.Arbeitseinsatz;
+import org.mapstruct.InjectionStrategy;
 import org.mapstruct.Mapper;
-import org.mapstruct.factory.Mappers;
 
 import java.util.List;
 
-@Mapper
+@Mapper(componentModel = "spring", injectionStrategy = InjectionStrategy.CONSTRUCTOR)
 public interface ArbeitseinsatzMapper {
-
-    ArbeitseinsatzMapper INSTANCE = Mappers.getMapper(ArbeitseinsatzMapper.class);
 
     Arbeitseinsatz map(ArbeitseinsatzDto arbeitseinsatzDto);
 

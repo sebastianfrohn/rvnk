@@ -16,7 +16,7 @@ import java.util.List;
 public class ArbeitseinsatzService {
 
     private final ArbeitseinsatzRepository arbeitseinsatzRepository;
-    private final ArbeitseinsatzMapper arbeitseinsatzMapper = ArbeitseinsatzMapper.INSTANCE;
+    private final ArbeitseinsatzMapper arbeitseinsatzMapper;
 
     public List<ArbeitseinsatzDto> findAll() {
         return arbeitseinsatzMapper.map(arbeitseinsatzRepository.findAll());
