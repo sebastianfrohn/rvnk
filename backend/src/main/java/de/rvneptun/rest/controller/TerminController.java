@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-import static de.rvneptun.misc.UserHelper.currentUserDetails;
 
 @Slf4j
 @RestController
@@ -22,7 +21,6 @@ public class TerminController {
 
     @GetMapping("/list")
     public List<TerminDto> listAvailable() {
-        log.info(currentUserDetails().map(UserDetails::getUsername).orElse("Es ist kein Nutzer angemeldet :-("));
 
         return TerminService.findAll();
     }

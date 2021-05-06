@@ -2,7 +2,7 @@ package de.rvneptun.misc;
 
 import org.springframework.security.core.GrantedAuthority;
 
-public enum Role implements GrantedAuthority {
+public enum Rolle implements GrantedAuthority {
     MITGLIED,
     ADMIN,
     ORGANISATOR;

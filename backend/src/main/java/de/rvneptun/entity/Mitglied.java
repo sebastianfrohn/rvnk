@@ -1,13 +1,11 @@
 package de.rvneptun.entity;
 
-import de.rvneptun.misc.Role;
+import de.rvneptun.misc.Rolle;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
-import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -35,8 +33,9 @@ public class Mitglied {
     @Column(length = 64)
     private String email;
 
-    @ElementCollection(targetClass = Role.class)
+    @ElementCollection(targetClass = Rolle.class)
     @Enumerated(EnumType.STRING)
-    private List<Role> roles;
+    private List<Rolle> rolles;
 
+    private String registertoken;
 }

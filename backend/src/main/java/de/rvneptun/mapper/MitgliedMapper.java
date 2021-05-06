@@ -11,6 +11,7 @@ import java.util.List;
 @Mapper(componentModel = "spring", injectionStrategy = InjectionStrategy.CONSTRUCTOR)
 public interface MitgliedMapper {
 
+    @Mapping(target = "registertoken", ignore = true)
     Mitglied map(MitgliedDto MitgliedDto);
 
     @Mapping(target = "authorities", ignore = true)

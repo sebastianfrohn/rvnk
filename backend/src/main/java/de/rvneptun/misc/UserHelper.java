@@ -1,5 +1,6 @@
 package de.rvneptun.misc;
 
+import de.rvneptun.dto.MitgliedDto;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -9,12 +10,12 @@ import java.util.Optional;
 
 public class UserHelper {
 
-    public static Optional<UserDetails> currentUserDetails(){
-        return Optional.of(SecurityContextHolder.getContext())
+    public static MitgliedDto getAngemeldetesMitglied() {
+        return Optional.ofNullable(SecurityContextHolder.getContext())
                 .map(SecurityContext::getAuthentication)
                 .map(Authentication::getPrincipal)
-                .filter(principal -> principal instanceof UserDetails)
-                .map(userDetails -> (UserDetails) userDetails)
-                .or(Optional::empty);
+                .map( m -> (MitgliedDto)m)
+                .orElseThrow(() ->    new RuntimeException("Nicht angemeldet!"));
     }
+
 }

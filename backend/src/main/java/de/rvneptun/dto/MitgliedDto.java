@@ -1,16 +1,12 @@
 package de.rvneptun.dto;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import de.rvneptun.misc.Role;
+import de.rvneptun.misc.Rolle;
 import lombok.*;
-import org.mapstruct.Mapping;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import javax.persistence.Entity;
-import java.time.LocalDateTime;
 import java.util.Collection;
-import java.util.Date;
 import java.util.List;
 
 @Builder
@@ -33,12 +29,12 @@ public class MitgliedDto implements UserDetails {
 
     private String email;
 
-    private List<Role> roles;
+    private List<Rolle> rolles;
 
     @Override
     @JsonIgnore
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return roles;
+        return rolles;
     }
 
     @Override

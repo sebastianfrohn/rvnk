@@ -28,7 +28,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                .antMatchers("/", "/home","/api/mitglied/encode/**").permitAll()
+                .antMatchers("/", "/home", "/api/mitglied/encode/**").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
@@ -39,17 +39,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .permitAll();
     }
 
-//    @Bean
-//    @Override
-//    public UserDetailsService userDetailsService() {
-//        return mitgliederAuthentificationService;
-//    }
-
     @Bean
     public DaoAuthenticationProvider authProvider() {
         DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
         authProvider.setUserDetailsService(mitgliederAuthentificationService);
-        authProvider.setPasswordEncoder(passwordEncoder     );
+        authProvider.setPasswordEncoder(passwordEncoder);
         return authProvider;
     }
 
