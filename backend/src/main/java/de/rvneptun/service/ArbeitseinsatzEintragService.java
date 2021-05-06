@@ -2,8 +2,8 @@ package de.rvneptun.service;
 
 import de.rvneptun.dto.ArbeitseinsatzEintragDto;
 import de.rvneptun.entity.ArbeitseinsatzEintrag;
+import de.rvneptun.exception.ArbeitseinsatzEintragException;
 import de.rvneptun.mapper.ArbeitseinsatzEintragMapper;
-import de.rvneptun.mapper.MitgliedMapper;
 import de.rvneptun.repository.ArbeitseinsatzEintragRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -32,7 +32,7 @@ public class ArbeitseinsatzEintragService {
     public Long update(Long id, ArbeitseinsatzEintragDto arbeitseinsatzEintragDto) {
         ArbeitseinsatzEintrag arbeitseinsatz = arbeitseinsatzEintragRepository
                 .findById(id)
-                .orElseThrow(() -> new RuntimeException("konnte keine Entity mit ID " + id + "finden"));
+                .orElseThrow(() -> new ArbeitseinsatzEintragException(id));
 
         ArbeitseinsatzEintrag newArbeitseinsatzEintrag = arbeitseinsatzEintragMapper.map(arbeitseinsatzEintragDto);
 
@@ -47,6 +47,8 @@ public class ArbeitseinsatzEintragService {
     }
 
     public ArbeitseinsatzEintragDto find(Long id) {
-        return arbeitseinsatzEintragMapper.mapReverse(arbeitseinsatzEintragRepository.findById(id).orElseThrow(() -> new RuntimeException()));
+        return arbeitseinsatzEintragMapper.mapReverse(
+                arbeitseinsatzEintragRepository.findById(id).orElseThrow(() -> new ArbeitseinsatzEintragException(id))
+        );
     }
 }

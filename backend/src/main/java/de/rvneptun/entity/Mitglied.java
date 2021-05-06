@@ -6,6 +6,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -18,10 +20,16 @@ public class Mitglied {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
+    @Column(length = 128, nullable = false, unique = true)
+    private String username;
+
+    @Column(length = 64)
     private String vorname;
 
+    @Column(length = 64)
     private String name;
 
+    @Column(length = 64)
     private String email;
 
     @ElementCollection(targetClass = Role.class)

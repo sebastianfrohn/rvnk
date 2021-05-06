@@ -2,6 +2,8 @@ package de.rvneptun.service;
 
 import de.rvneptun.dto.ArbeitseinsatzDto;
 import de.rvneptun.entity.Arbeitseinsatz;
+import de.rvneptun.exception.ArbeitseinsatzEintragException;
+import de.rvneptun.exception.ArbeitseinsatzException;
 import de.rvneptun.mapper.ArbeitseinsatzMapper;
 import de.rvneptun.mapper.MitgliedMapper;
 import de.rvneptun.repository.ArbeitseinsatzRepository;
@@ -33,7 +35,7 @@ public class ArbeitseinsatzService {
     public Long update(Long id, ArbeitseinsatzDto arbeitseinsatzDto) {
         Arbeitseinsatz arbeitseinsatz = arbeitseinsatzRepository
                 .findById(id)
-                .orElseThrow(() -> new RuntimeException("konnte keine Entity mit ID " + id + "finden"));
+                .orElseThrow(() -> new ArbeitseinsatzException(id));
 
         Arbeitseinsatz newArbeitseinsatz = arbeitseinsatzMapper.map(arbeitseinsatzDto);
 
@@ -50,7 +52,7 @@ public class ArbeitseinsatzService {
     public ArbeitseinsatzDto find(Long id) {
         return arbeitseinsatzMapper.map(arbeitseinsatzRepository
                 .findById(id)
-                .orElseThrow(() ->  new RuntimeException("Kein Element mit IDd + " + id +  " gefunden"))
+                .orElseThrow(() ->  new ArbeitseinsatzException(id))
         );
     }
 }

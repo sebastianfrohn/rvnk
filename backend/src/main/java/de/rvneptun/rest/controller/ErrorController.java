@@ -1,4 +1,4 @@
-package de.rvneptun.controller;
+package de.rvneptun.rest.controller;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;

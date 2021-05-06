@@ -2,12 +2,14 @@ package de.rvneptun.service;
 
 import de.rvneptun.dto.MitgliedDto;
 import de.rvneptun.entity.Mitglied;
+import de.rvneptun.exception.MitgliedNotFoundException;
 import de.rvneptun.mapper.MitgliedMapper;
 import de.rvneptun.repository.MitgliedRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -47,10 +49,18 @@ public class MitgliedService {
         mitgliedRepository.deleteById(id);
     }
 
-    public MitgliedDto find(Long id) {
+    public MitgliedDto findById(Long id) {
         return mitgliedMapper.map(mitgliedRepository
                 .findById(id)
-                .orElseThrow(() ->  new RuntimeException("Kein Element mit ID + " + id +  " gefunden"))
+                .orElseThrow(() ->  new MitgliedNotFoundException(id))
         );
     }
+
+    public MitgliedDto findByUsername(String username) {
+        return mitgliedMapper.map(mitgliedRepository
+                .findByUsername(username)
+                .orElseThrow(() -> new MitgliedNotFoundException(username) )
+        );
+    }
+
 }

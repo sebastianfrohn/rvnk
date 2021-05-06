@@ -1,4 +1,4 @@
-package de.rvneptun.controller;
+package de.rvneptun.rest.controller;
 
 import de.rvneptun.dto.MitgliedDto;
 import de.rvneptun.service.MitgliedService;
@@ -22,24 +22,24 @@ public class MitgliedController {
 
     @GetMapping("/{id}")
     public MitgliedDto find(@PathVariable Long id) {
-        return mitgliedService.find(id);
+        return mitgliedService.findById(id);
     }
 
     @PostMapping("/")
     @Transactional
-    public Long addElement(@RequestBody MitgliedDto element) {
+    public Long add(@RequestBody MitgliedDto element) {
         return mitgliedService.add(element);
     }
 
     @PutMapping("/{id}")
     @Transactional
-    public Long updateElement(@PathVariable Long id, @RequestBody MitgliedDto element) {
+    public Long update(@PathVariable Long id, @RequestBody MitgliedDto element) {
         return mitgliedService.update(id, element);
     }
 
     @DeleteMapping("/{id}")
     @Transactional
-    public void  updateElement(@PathVariable Long id) {
+    public void  delete(@PathVariable Long id) {
         mitgliedService.delete(id);
     }
 }
