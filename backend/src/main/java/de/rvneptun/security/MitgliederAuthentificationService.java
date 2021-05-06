@@ -1,6 +1,5 @@
 package de.rvneptun.security;
 
-import de.rvneptun.dto.MitgliedDto;
 import de.rvneptun.service.MitgliedService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -16,9 +15,6 @@ public class MitgliederAuthentificationService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        MitgliedDto user = mitgliedService.findByUsername(username);
-
-
-        return null;
+        return mitgliedService.findByUsername(username);
     }
 }

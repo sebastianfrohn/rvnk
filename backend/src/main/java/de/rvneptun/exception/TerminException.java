@@ -1,10 +1,10 @@
 package de.rvneptun.exception;
 
-public class ArbeitseinsatzException extends  RuntimeException{
+public class TerminException extends  RuntimeException{
 
     private Long id;
 
-    public ArbeitseinsatzException(Long id) {
+    public TerminException(Long id) {
         this.id = id;
     }
 

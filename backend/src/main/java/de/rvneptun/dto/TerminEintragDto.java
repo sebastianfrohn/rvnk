@@ -5,19 +5,19 @@ import lombok.*;
 import java.util.Date;
 
 @Builder
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 @Getter
 @Setter
-public class ArbeitseinsatzDto {
+public class TerminEintragDto {
 
     private long id;
-
-    private String description;
 
     private Date datum;
 
     private MitgliedDto mitglied;
+
+    private  TerminDto termin;
 }
 
 

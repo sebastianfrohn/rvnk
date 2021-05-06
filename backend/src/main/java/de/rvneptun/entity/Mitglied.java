@@ -30,6 +30,9 @@ public class Mitglied {
     private String name;
 
     @Column(length = 64)
+    private String password;
+
+    @Column(length = 64)
     private String email;
 
     @ElementCollection(targetClass = Role.class)

@@ -10,7 +10,7 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("mitglied")
+@RequestMapping("api/mitglied")
 public class MitgliedController {
 
     private final MitgliedService mitgliedService;
@@ -18,6 +18,11 @@ public class MitgliedController {
     @GetMapping("/list")
     public List<MitgliedDto> listAvailable() {
         return mitgliedService.findAll();
+    }
+
+    @GetMapping("/encode/{pwd}")
+    public String encode(@PathVariable String pwd) {
+        return mitgliedService.encode(pwd);
     }
 
     @GetMapping("/{id}")

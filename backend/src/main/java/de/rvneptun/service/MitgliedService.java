@@ -6,10 +6,10 @@ import de.rvneptun.exception.MitgliedNotFoundException;
 import de.rvneptun.mapper.MitgliedMapper;
 import de.rvneptun.repository.MitgliedRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -19,6 +19,7 @@ public class MitgliedService {
 
     private final MitgliedRepository mitgliedRepository;
     private final MitgliedMapper mitgliedMapper;
+    private final PasswordEncoder passwordEncoder;
 
     public List<MitgliedDto> findAll() {
         return mitgliedMapper.map(mitgliedRepository.findAll());
@@ -30,16 +31,17 @@ public class MitgliedService {
     }
 
     @Transactional
-    public Long update(Long id, MitgliedDto miitgliedDto) {
+    public Long update(Long id, MitgliedDto mitgliedDto) {
         Mitglied mitglied = mitgliedRepository
                 .findById(id)
                 .orElseThrow(() -> new RuntimeException("konnte keine Entity mit ID " + id + "finden"));
 
-        Mitglied newMitglied = mitgliedMapper.map(miitgliedDto);
+        Mitglied newMitglied = mitgliedMapper.map(mitgliedDto);
 
         mitglied.setName(newMitglied.getName());
         mitglied.setVorname(newMitglied.getVorname());
         mitglied.setEmail(newMitglied.getEmail());
+        mitglied.setPassword(passwordEncoder.encode(newMitglied.getPassword()));
 
         return id;
     }
@@ -63,4 +65,7 @@ public class MitgliedService {
         );
     }
 
+    public String encode(String pwd) {
+        return passwordEncoder.encode(pwd);
+    }
 }

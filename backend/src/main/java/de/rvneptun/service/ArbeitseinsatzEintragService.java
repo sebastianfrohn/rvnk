@@ -2,6 +2,7 @@ package de.rvneptun.service;
 
 import de.rvneptun.dto.ArbeitseinsatzEintragDto;
 import de.rvneptun.entity.ArbeitseinsatzEintrag;
+import de.rvneptun.entity.TerminEintrag;
 import de.rvneptun.exception.ArbeitseinsatzEintragException;
 import de.rvneptun.mapper.ArbeitseinsatzEintragMapper;
 import de.rvneptun.repository.ArbeitseinsatzEintragRepository;

@@ -1,15 +1,9 @@
 package de.rvneptun.rest.controller;
 
-import de.rvneptun.dto.ArbeitseinsatzDto;
 import de.rvneptun.dto.ArbeitseinsatzEintragDto;
 import de.rvneptun.service.ArbeitseinsatzEintragService;
-import de.rvneptun.service.ArbeitseinsatzService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContext;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 

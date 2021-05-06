@@ -1,7 +1,6 @@
 package de.rvneptun.entity;
 
 import de.rvneptun.misc.ArbeitseinsatzEintragStatus;
-import de.rvneptun.misc.Role;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -13,19 +12,10 @@ import java.util.Date;
 @NoArgsConstructor
 @Getter
 @Setter
-public class ArbeitseinsatzEintrag {
+public class ArbeitseinsatzEintrag extends TerminEintrag {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
-
-    @ManyToOne(cascade = CascadeType.MERGE)
-    private Mitglied mitglied;
-
-    @ManyToOne(cascade = CascadeType.MERGE)
-    private Arbeitseinsatz arbeitseinsatz;
-
-    private Date datum;
+    @OneToOne
+    TerminEintrag terminEintrag;
 
     private Double geleisteteStunden;
 

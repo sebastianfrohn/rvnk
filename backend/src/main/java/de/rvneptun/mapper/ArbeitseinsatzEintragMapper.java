@@ -1,15 +1,14 @@
 package de.rvneptun.mapper;
 
-import de.rvneptun.dto.ArbeitseinsatzDto;
 import de.rvneptun.dto.ArbeitseinsatzEintragDto;
-import de.rvneptun.entity.Arbeitseinsatz;
 import de.rvneptun.entity.ArbeitseinsatzEintrag;
+import de.rvneptun.entity.TerminEintrag;
 import org.mapstruct.InjectionStrategy;
 import org.mapstruct.Mapper;
 
 import java.util.List;
 
-@Mapper(componentModel = "spring", injectionStrategy = InjectionStrategy.CONSTRUCTOR)
+@Mapper(componentModel = "spring", injectionStrategy = InjectionStrategy.CONSTRUCTOR, uses = MitgliedMapper.class)
 public interface ArbeitseinsatzEintragMapper {
 
     ArbeitseinsatzEintrag map(ArbeitseinsatzEintragDto arbeitseinsatzDto);

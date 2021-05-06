@@ -1,27 +1,19 @@
 package de.rvneptun.dto;
 
-import de.rvneptun.entity.Arbeitseinsatz;
+import de.rvneptun.entity.ArbeitseinsatzEintrag;
 import de.rvneptun.entity.Mitglied;
 import de.rvneptun.misc.ArbeitseinsatzEintragStatus;
 import lombok.*;
 
-import javax.persistence.*;
 import java.util.Date;
 
-@Builder
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
 @Getter
 @Setter
-public class ArbeitseinsatzEintragDto {
+public class ArbeitseinsatzEintragDto  extends  TerminEintragDto {
 
-    private long id;
-
-    private Mitglied mitglied;
-
-    private Arbeitseinsatz arbeitseinsatz;
-
-    private Date datum;
+    private TerminEintragDto terminEintrag;
 
     private Double geleisteteStunden;
 
