@@ -3,13 +3,14 @@ package de.rvneptun.misc;
 import org.springframework.security.core.GrantedAuthority;
 
 public enum Rolle implements GrantedAuthority {
+    ANGEMELDET,
     MITGLIED,
-    ADMIN,
     ORGANISATOR,
+    ADMIN,
     SUPERADMIN;
 
     @Override
     public String getAuthority() {
-        return "ROLE_" + this.name();
+        return this.name();
     }
 }

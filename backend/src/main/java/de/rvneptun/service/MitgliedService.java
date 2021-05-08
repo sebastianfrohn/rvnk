@@ -52,7 +52,7 @@ public class MitgliedService {
 
         mitgliedRepository.saveAndFlush(mitglied);
 
-        if (UserHelper.getAngemeldetesMitglied().getRollen().contains(Rolle.SUPERADMIN) && !Strings.isEmpty(newMitglied.getPassword())) {
+        if (UserHelper.getROLE_ANGEMELDETesMitglied().getRollen().contains(Rolle.SUPERADMIN) && !Strings.isEmpty(newMitglied.getPassword())) {
             mitglied.setPassword(passwordEncoder.encode(newMitglied.getPassword()));
         }
 

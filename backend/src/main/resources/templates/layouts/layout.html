@@ -7,11 +7,14 @@
 
 <div th:if = "${user} != null">
     <span th:text="'Hallo ' + ${user.vorname} +  ' ' + ${user.name}">Hello world!</span>
-    <a th:href="@{/logout}">zum Logout</a>
+    <br/>
+    <a th:href="@{/logout}">zum Logout</a> |
+    <a th:href="@{/}">Startseite</a>
+    <hr>
 </div>
 
 <div th:if = "${user} == null">
-    <span>Du bist nicht angemeldet</span>
+    <span>Du bist nicht ROLE_ANGEMELDET</span>
     <a th:href="@{/login}">zum Login</a>
 </div>
 

@@ -10,7 +10,7 @@ import java.util.Optional;
 
 public class UserHelper {
 
-    public static MitgliedDto getAngemeldetesMitglied() {
+    public static MitgliedDto getROLE_ANGEMELDETesMitglied() {
         Object mitglied = Optional.ofNullable(SecurityContextHolder.getContext())
                 .map(SecurityContext::getAuthentication)
                 .map(Authentication::getPrincipal)

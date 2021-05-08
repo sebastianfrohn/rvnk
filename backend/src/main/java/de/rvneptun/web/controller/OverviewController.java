@@ -1,8 +1,5 @@
 package de.rvneptun.web.controller;
 
-
-import de.rvneptun.dto.MitgliedDto;
-import de.rvneptun.misc.WithUserMetadata;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -10,14 +7,9 @@ import org.springframework.security.web.authentication.logout.SecurityContextLog
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import static de.rvneptun.misc.UserHelper.getAngemeldetesMitglied;
 
 @Controller
 public class OverviewController extends DefaultController {
@@ -27,12 +19,13 @@ public class OverviewController extends DefaultController {
         return "home";
     }
 
-    @Secured("ROLE_MITGLIED")
-    @GetMapping("/hello")
+    @Secured("ANGEMELDET")
+    @GetMapping("/benutzerdaten")
     public String hello(Model model) {
-        return "hello";
+        return "mitglieder/benutzerdaten";
     }
 
+    @Secured("ANGEMELDET")
     @GetMapping("/logout")
     public String logoutPage (HttpServletRequest request, HttpServletResponse response) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
