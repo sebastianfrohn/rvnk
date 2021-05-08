@@ -4,8 +4,11 @@ import de.rvneptun.dto.MitgliedDto;
 import de.rvneptun.entity.Mitglied;
 import de.rvneptun.exception.MitgliedNotFoundException;
 import de.rvneptun.mapper.MitgliedMapper;
+import de.rvneptun.misc.Rolle;
+import de.rvneptun.misc.UserHelper;
 import de.rvneptun.repository.MitgliedRepository;
 import lombok.RequiredArgsConstructor;
+import org.apache.logging.log4j.util.Strings;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -41,7 +44,17 @@ public class MitgliedService {
         mitglied.setName(newMitglied.getName());
         mitglied.setVorname(newMitglied.getVorname());
         mitglied.setEmail(newMitglied.getEmail());
-        mitglied.setPassword(passwordEncoder.encode(newMitglied.getPassword()));
+
+        List<Rolle> rollen = newMitglied.getRollen();
+        rollen.remove(Rolle.SUPERADMIN);
+
+        mitglied.setRollen(rollen);
+
+        mitgliedRepository.saveAndFlush(mitglied);
+
+        if (UserHelper.getAngemeldetesMitglied().getRollen().contains(Rolle.SUPERADMIN) && !Strings.isEmpty(newMitglied.getPassword())) {
+            mitglied.setPassword(passwordEncoder.encode(newMitglied.getPassword()));
+        }
 
         return id;
     }

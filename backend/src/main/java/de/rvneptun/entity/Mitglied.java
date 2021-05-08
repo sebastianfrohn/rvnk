@@ -35,7 +35,7 @@ public class Mitglied {
 
     @ElementCollection(targetClass = Rolle.class)
     @Enumerated(EnumType.STRING)
-    private List<Rolle> rolles;
+    private List<Rolle> rollen;
 
     private String registertoken;
 }

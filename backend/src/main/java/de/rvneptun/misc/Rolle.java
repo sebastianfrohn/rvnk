@@ -5,10 +5,11 @@ import org.springframework.security.core.GrantedAuthority;
 public enum Rolle implements GrantedAuthority {
     MITGLIED,
     ADMIN,
-    ORGANISATOR;
+    ORGANISATOR,
+    SUPERADMIN;
 
     @Override
     public String getAuthority() {
-        return this.name();
+        return "ROLE_" + this.name();
     }
 }

@@ -1,10 +1,20 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
+<html lang="de" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/layout}" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
       xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
-<head>
-    <title>Hello World!</title>
-</head>
 <body>
-<h1 th:text="'Hello ' + ${name}">Hello world!</h1>
+
+<div layout:fragment="content">
+    <h1>Benutzerdaten</h1>
+    <ul>
+        <li><p th:text="'id: ' + ${user.id}"></p></li>
+        <li><p th:text="'Name: ' + ${user.name}"></p></li>
+        <li><p th:text="'Vorname: ' + ${user.vorname}"></p></li>
+        <li><p th:text="'email: ' + ${user.email}"></p></li>
+        <li><p th:text="'username: ' +${user.username}"></p></li>
+        <li><p th:text="'rollen: ' + ${user.rollen}"></p></li>
+    </ul>
+</div>
+
 </body>
 </html>

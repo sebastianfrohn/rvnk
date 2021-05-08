@@ -1,6 +1,7 @@
 package de.rvneptun.dto;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import de.rvneptun.misc.Rolle;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
@@ -24,17 +25,17 @@ public class MitgliedDto implements UserDetails {
 
     private String name;
 
-    @JsonIgnore
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String password;
 
     private String email;
 
-    private List<Rolle> rolles;
+    private List<Rolle> rollen;
 
     @Override
     @JsonIgnore
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return rolles;
+        return rollen;
     }
 
     @Override
