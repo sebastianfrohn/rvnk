@@ -1,12 +1,12 @@
 package de.rvneptun.service;
 
-import de.rvneptun.dto.MitgliedDto;
-import de.rvneptun.entity.Mitglied;
-import de.rvneptun.exception.MitgliedNotFoundException;
-import de.rvneptun.mapper.MitgliedMapper;
-import de.rvneptun.misc.Rolle;
+import de.rvneptun.controller.dto.MitgliedDto;
+import de.rvneptun.data.entity.Mitglied;
+import de.rvneptun.misc.exception.MitgliedNotFoundException;
+import de.rvneptun.data.mapper.MitgliedMapper;
+import de.rvneptun.data.entity.Rolle;
 import de.rvneptun.misc.UserHelper;
-import de.rvneptun.repository.MitgliedRepository;
+import de.rvneptun.data.repository.MitgliedRepository;
 import lombok.RequiredArgsConstructor;
 import org.apache.logging.log4j.util.Strings;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -52,7 +52,7 @@ public class MitgliedService {
 
         mitgliedRepository.saveAndFlush(mitglied);
 
-        if (UserHelper.getROLE_ANGEMELDETesMitglied().getRollen().contains(Rolle.SUPERADMIN) && !Strings.isEmpty(newMitglied.getPassword())) {
+        if (UserHelper.getAngemeldetesMitglied().getRollen().contains(Rolle.SUPERADMIN) && !Strings.isEmpty(newMitglied.getPassword())) {
             mitglied.setPassword(passwordEncoder.encode(newMitglied.getPassword()));
         }
 

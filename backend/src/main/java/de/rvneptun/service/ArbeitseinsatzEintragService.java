@@ -1,11 +1,10 @@
 package de.rvneptun.service;
 
-import de.rvneptun.dto.ArbeitseinsatzEintragDto;
-import de.rvneptun.entity.ArbeitseinsatzEintrag;
-import de.rvneptun.entity.TerminEintrag;
-import de.rvneptun.exception.ArbeitseinsatzEintragException;
-import de.rvneptun.mapper.ArbeitseinsatzEintragMapper;
-import de.rvneptun.repository.ArbeitseinsatzEintragRepository;
+import de.rvneptun.controller.dto.ArbeitseinsatzEintragDto;
+import de.rvneptun.data.entity.ArbeitseinsatzEintrag;
+import de.rvneptun.misc.exception.ArbeitseinsatzEintragException;
+import de.rvneptun.data.mapper.ArbeitseinsatzEintragMapper;
+import de.rvneptun.data.repository.ArbeitseinsatzEintragRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

@@ -1,11 +1,10 @@
 package de.rvneptun.service;
 
-import de.rvneptun.dto.TerminDto;
-import de.rvneptun.entity.Termin;
-import de.rvneptun.exception.TerminException;
-import de.rvneptun.mapper.TerminMapper;
-import de.rvneptun.mapper.MitgliedMapper;
-import de.rvneptun.repository.TerminRepository;
+import de.rvneptun.controller.dto.TerminDto;
+import de.rvneptun.data.entity.Termin;
+import de.rvneptun.misc.exception.TerminException;
+import de.rvneptun.data.mapper.TerminMapper;
+import de.rvneptun.data.repository.TerminRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -17,39 +16,38 @@ import java.util.List;
 @Transactional(readOnly = true)
 public class TerminService {
 
-    private final TerminRepository TerminRepository;
-    private final TerminMapper TerminMapper;
-    private final MitgliedMapper verantwortlicherMapper;
+    private final TerminRepository terminRepository;
+    private final TerminMapper terminMapper;
 
     public List<TerminDto> findAll() {
-        return TerminMapper.map(TerminRepository.findAll());
+        return terminMapper.map(terminRepository.findAll());
     }
 
     @Transactional
     public Long add(TerminDto element) {
-        return TerminRepository.save(TerminMapper.map(element)).getId();
+        return terminRepository.save(terminMapper.map(element)).getId();
     }
 
     @Transactional
     public Long update(Long id, TerminDto TerminDto) {
-        Termin Termin = TerminRepository
+        Termin Termin = terminRepository
                 .findById(id)
                 .orElseThrow(() -> new TerminException(id));
 
-        Termin newTermin = TerminMapper.map(TerminDto);
+        Termin newTermin = terminMapper.map(TerminDto);
 
-        Termin.setDescription(newTermin.getDescription());
+        Termin.setBeschreibung(newTermin.getBeschreibung());
 
         return id;
     }
 
     @Transactional
     public void delete(Long id) {
-        TerminRepository.deleteById(id);
+        terminRepository.deleteById(id);
     }
 
     public TerminDto find(Long id) {
-        return TerminMapper.map(TerminRepository
+        return terminMapper.map(terminRepository
                 .findById(id)
                 .orElseThrow(() ->  new TerminException(id))
         );
