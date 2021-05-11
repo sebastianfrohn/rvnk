@@ -26,6 +26,8 @@ public class TerminVo {
 
     private List<MitgliedDto> anmeldungen;
 
+    private String teilnehmerNamen;
+
     private List<ArbeitseinsatzEintragDto> arbeitsstunden;
 
     private MitgliedDto organisator;

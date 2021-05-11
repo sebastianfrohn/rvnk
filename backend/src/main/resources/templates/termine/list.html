@@ -12,15 +12,12 @@
             <th>Titel</th>
             <th>Beschreibung</th>
             <th>Organisator</th>
-            <th>Aktionen</th>
         </tr>
         <tr th:each="termin,iterStat : ${termine}" th:class="${iterStat.odd}? 'odd'">
-            <td th:text="${termin.titel}">Titel</td>
+            <td><a th:href="@{'/termine/termin/' + ${termin.id}}"  th:text="${termin.titel}">Link</a></td>
             <td th:text="${termin.beschreibung}">Beschreibung</td>
             <td th:text="${termin.datum}">Datum</td>
             <td th:text="${termin.organisator != null ? termin.organisator.vorname + ' ' + termin.organisator.name : '-'}">Datum</td>
-            <td th:if="${termin.mitgliedAngemeldet == true}"><a th:href="@{'/termine/anmelden/' + ${termin.id}}">Abmelden</td>
-            <td th:if="${termin.mitgliedAngemeldet == false}"><a th:href="@{'/termine/abmelden/' + ${termin.id}}">Anmelden</td>
         </tr>
     </table>
 </div>

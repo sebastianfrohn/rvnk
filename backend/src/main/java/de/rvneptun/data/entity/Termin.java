@@ -31,7 +31,7 @@ public class Termin {
     @ManyToMany
     private List<Mitglied> anmeldungen;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.LAZY)
     private List<ArbeitseinsatzEintrag> arbeitsstunden;
 
     @ManyToOne(cascade = CascadeType.ALL)
