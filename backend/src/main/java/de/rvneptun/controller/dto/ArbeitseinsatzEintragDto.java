@@ -1,11 +1,11 @@
 package de.rvneptun.controller.dto;
 
-import de.rvneptun.data.entity.Mitglied;
 import de.rvneptun.misc.ArbeitseinsatzEintragStatus;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import java.time.LocalDateTime;
 
 @AllArgsConstructor
@@ -23,6 +23,8 @@ public class ArbeitseinsatzEintragDto {
     private MitgliedDto mitglied;
 
     private ArbeitseinsatzEintragStatus arbeitseinsatzEintragStatus;
+
+    private TerminDto termin;
 
 }
 

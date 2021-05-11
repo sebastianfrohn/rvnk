@@ -3,7 +3,6 @@ package de.rvneptun.data.entity;
 import de.rvneptun.misc.ArbeitseinsatzEintragStatus;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.NonNull;
 import lombok.Setter;
 
 import javax.persistence.*;
@@ -29,6 +28,8 @@ public class ArbeitseinsatzEintrag {
     @Enumerated(EnumType.STRING)
     private ArbeitseinsatzEintragStatus arbeitseinsatzEintragStatus;
 
+    @ManyToOne
+    private Termin termin;
 }
 
 

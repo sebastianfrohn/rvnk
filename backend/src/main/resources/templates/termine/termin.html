@@ -1,29 +1,35 @@
 <!DOCTYPE html>
 <html lang="de" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{layouts/layout}" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
-      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+>
 <body>
 
 <div layout:fragment="content">
     <h1 th:text="${'Termin: ' + termin.titel}">Termin: </h1>
     <h3>Datum</h3>
-        <span th:text=="${termin.datum}"></span>
+    <span th:text=="${termin.datumVon + ' bis ' + termin.datumBis}"></span>
     <h3>Beschreibung:</h3>
-        <span th:text="${termin.beschreibung}"></span>
+    <span th:text="${termin.beschreibung}"></span>
     <h3>Anmeldungen:</h3>
 
-            <span th:text="${termin.teilnehmerNamen}"></span>
+    <span th:text="${termin.teilnehmerNamen}"></span>
 
     <h3>Aktionen</h3>
-    <span th:if="${termin.mitgliedAngemeldet == true}"> <a th:href="@{'/termine/termin/' + ${termin.id} + '/abmelden'}">Abmelden</a></span>
-    <span th:if="${termin.mitgliedAngemeldet == false}"><a th:href="@{'/termine/termin/' + ${termin.id} + '/anmelden'}">Anmelden</a></span>
-
-        <span th:if="${termin.mitgliedAngemeldet == true}"><a th:href="@{'/arbeitsstunden/bearbeiten/' + ${termin.id}}">Arbeitsstunden eintragen </a></span>
     <hr>
+    <a th:if="${termin.mitgliedAngemeldet}" th:href="@{'/termine/termin/' + ${termin.id} + '/abmelden'}">Abmelden</a>
+    <a th:if="${!termin.mitgliedAngemeldet}" th:href="@{'/termine/termin/' + ${termin.id} + '/anmelden'}">Anmelden</a>
+    <a th:if="${termin.darfBearbeiten}" th:href="@{'/termine/termin/' + ${termin.id} + '/loeschen'}">löschen</a>
+    <a th:if="${termin.darfBearbeiten}" th:href="@{'/termine/termin/' + ${termin.id} + '/bearbeiten'}">bearbeiten</a>
+    <a th:if="${termin.mitgliedAngemeldet == true && termin.arbeitseinsatz == true}"
+       th:href="@{'/arbeitseinsaetze/einreichungen/erstellen/termin/' + ${termin.id}}">Arbeitsstunden eintragen </a>
+
+    <br/><br/>
     <div>
         <a th:href="@{/termine/}">zurück </a>
     </div>
+
 </div>
+
 
 </body>
 </html>

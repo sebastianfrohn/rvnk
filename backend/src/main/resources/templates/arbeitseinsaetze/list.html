@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="de" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/layout}" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
+>
+<body>
+
+<div layout:fragment="content">
+    <h1 th:text="${titel}">Titel</h1>
+    <table>
+        <tr>
+            <th>Termin - Titel</th>
+            <th>Stunden</th>
+            <th>Organisator</th>
+            <th>Anmeldender</th>
+            <th>Status</th>
+        </tr>
+        <tr th:each="einsatz,iterStat : ${einsaetze}" th:class="${iterStat.odd}? 'odd'">
+            <td th:text="${einsatz.termin.titel}">Titel</a></td>
+            <td th:text="${einsatz.geleisteteStunden}">Stunden</td>
+            <td th:text="${einsatz.termin.organisator.fullName}">Organisator</td>
+            <td th:text="${einsatz.mitglied.fullName}">Datum</td>
+            <td th:text="${einsatz.arbeitseinsatzEintragStatus}">Status</td>
+        </tr>
+    </table>
+</div>
+
+</body>
+</html>

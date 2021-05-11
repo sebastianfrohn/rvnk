@@ -1,14 +1,10 @@
 package de.rvneptun.controller.dto;
 
-import de.rvneptun.data.entity.ArbeitseinsatzEintrag;
-import de.rvneptun.data.entity.Mitglied;
 import lombok.*;
+import org.springframework.format.annotation.DateTimeFormat;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Builder
@@ -24,15 +20,21 @@ public class TerminDto {
 
     private String beschreibung;
 
-    private LocalDateTime datum;
+    @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
+    private LocalDateTime datumVon;
 
+    @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
     private LocalDateTime datumBis;
 
-    private List<MitgliedDto> anmeldungen;
+    @Builder.Default
+    private List<MitgliedDto> anmeldungen = new ArrayList<>();
 
-    private List<ArbeitseinsatzEintragDto> arbeitsstunden;
+    @Builder.Default
+    private List<ArbeitseinsatzEintragDto> arbeitsstunden = new ArrayList<>();
 
     private MitgliedDto organisator;
+
+    private boolean arbeitseinsatz;
 }
 
 

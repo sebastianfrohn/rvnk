@@ -1,25 +1,31 @@
 <!DOCTYPE html>
 <html lang="de" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{layouts/layout}" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
-      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+>
 <body>
 
 <div layout:fragment="content">
     <h1>Termine</h1>
     <table>
         <tr>
-            <th>Datum</th>
+            <th>datumVon</th>
             <th>Titel</th>
             <th>Beschreibung</th>
             <th>Organisator</th>
         </tr>
         <tr th:each="termin,iterStat : ${termine}" th:class="${iterStat.odd}? 'odd'">
-            <td><a th:href="@{'/termine/termin/' + ${termin.id}}"  th:text="${termin.titel}">Link</a></td>
+            <td><a th:href="@{'/termine/termin/' + ${termin.id}}" th:text="${termin.titel}">Link</a></td>
             <td th:text="${termin.beschreibung}">Beschreibung</td>
-            <td th:text="${termin.datum}">Datum</td>
-            <td th:text="${termin.organisator != null ? termin.organisator.vorname + ' ' + termin.organisator.name : '-'}">Datum</td>
+            <td th:text="${termin.datumVon + ' bis ' + termin.datumBis}">Datum</td>
+            <td th:text="${termin.organisator != null ? termin.organisator.vorname + ' ' + termin.organisator.name : '-'}">
+                Datum
+            </td>
         </tr>
     </table>
+    <div th:if="${user.hasRolle('ORGANISATOR')}">
+        <hr>
+        <a th:href="@{termin/erstellen}">Neuen Termin anlegen</a>
+    </div>
 </div>
 
 </body>

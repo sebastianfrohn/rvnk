@@ -27,7 +27,7 @@ public class TerminRestController {
     @GetMapping("/{id}")
     @Transactional
     public void  find(@PathVariable Long id) {
-        TerminService.find(id);
+        TerminService.findById(id);
     }
 
     @PostMapping("/")

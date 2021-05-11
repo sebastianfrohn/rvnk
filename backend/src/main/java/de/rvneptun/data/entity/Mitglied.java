@@ -38,4 +38,5 @@ public class Mitglied {
     private List<Rolle> rollen;
 
     private String registertoken;
+
 }

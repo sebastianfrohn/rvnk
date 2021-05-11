@@ -1,18 +1,23 @@
 package de.rvneptun.service;
 
+import de.rvneptun.controller.dto.ArbeitseinsatzEintragDto;
+import de.rvneptun.controller.dto.MitgliedDto;
 import de.rvneptun.controller.dto.TerminDto;
 import de.rvneptun.data.entity.Mitglied;
 import de.rvneptun.data.entity.Termin;
-import de.rvneptun.misc.UserHelper;
-import de.rvneptun.misc.exception.TerminException;
 import de.rvneptun.data.mapper.TerminMapper;
 import de.rvneptun.data.repository.TerminRepository;
+import de.rvneptun.misc.ArbeitseinsatzEintragStatus;
+import de.rvneptun.misc.UserHelper;
+import de.rvneptun.misc.exception.ForbiddenException;
+import de.rvneptun.misc.exception.TerminNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.Optional;
+
+import static de.rvneptun.data.entity.Rolle.ADMIN;
 
 @Service
 @RequiredArgsConstructor
@@ -35,7 +40,7 @@ public class TerminService {
     public Long update(Long id, TerminDto TerminDto) {
         Termin Termin = terminRepository
                 .findById(id)
-                .orElseThrow(() -> new TerminException(id));
+                .orElseThrow(() -> new TerminNotFoundException(id));
 
         Termin newTermin = terminMapper.map(TerminDto);
 
@@ -49,27 +54,71 @@ public class TerminService {
         terminRepository.deleteById(id);
     }
 
-    public TerminDto find(Long id) {
-        return terminMapper.map(terminRepository
-                .findById(id)
-                .orElseThrow(() ->  new TerminException(id))
-        );
+    public TerminDto findById(long id) {
+        return terminMapper.map(terminRepository.findById(id).orElseThrow(() -> new TerminNotFoundException(id)));
     }
 
-    public TerminDto findById(long id) {
-        return terminMapper.map(terminRepository.findById(id).orElseThrow(() ->  new TerminException(id)));
-    }
     @Transactional
     public void anmelden(long id) {
-        Termin termin = terminRepository.findById(id).orElseThrow(() -> new TerminException(id));
+        Termin termin = terminRepository.findById(id).orElseThrow(() -> new TerminNotFoundException(id));
         Long userId = UserHelper.getAngemeldetesMitglied().getId();
         termin.getAnmeldungen().add(Mitglied.builder().id(userId).build());
     }
 
     @Transactional
     public void abmelden(long id) {
-        Termin termin = terminRepository.findById(id).orElseThrow(() -> new TerminException(id));
+        Termin termin = terminRepository.findById(id).orElseThrow(() -> new TerminNotFoundException(id));
         Long userId = UserHelper.getAngemeldetesMitglied().getId();
         termin.getAnmeldungen().remove(Mitglied.builder().id(userId).build());
+    }
+
+    @Transactional
+    public void loeschen(long id) {
+        getTerminAndPruefeRechte(id);
+
+        terminRepository.deleteById(id);
+    }
+
+    @Transactional
+    public TerminDto save(TerminDto neuerTermin) {
+
+        Termin termin = getTerminAndPruefeRechte(neuerTermin.getId());
+
+        termin.setTitel(neuerTermin.getTitel());
+        termin.setBeschreibung(neuerTermin.getBeschreibung());
+        termin.setArbeitseinsatz(neuerTermin.isArbeitseinsatz());
+        termin.setDatumVon(neuerTermin.getDatumVon());
+        termin.setDatumBis(neuerTermin.getDatumBis());
+        if (termin.getOrganisator() == null) {
+            termin.setOrganisator(Mitglied.builder().id(UserHelper.getAngemeldetesMitglied().getId()).build());
+        }
+
+        return terminMapper.map(terminRepository.save(termin));
+    }
+
+    private Termin getTerminAndPruefeRechte(long id) {
+        MitgliedDto angemeldetesMitglied = UserHelper.getAngemeldetesMitglied();
+
+        Termin termin = terminRepository.findById(id).orElseGet(Termin::new);
+
+        if (termin.getId() != 0 && isOrganisator(angemeldetesMitglied, termin) && angemeldetesMitglied.hasRolle(ADMIN)) {
+            throw new ForbiddenException();
+        }
+        return termin;
+    }
+
+    private boolean isOrganisator(MitgliedDto angemeldetesMitglied, Termin termin) {
+        return termin.getOrganisator().getId() != angemeldetesMitglied.getId();
+    }
+
+    public ArbeitseinsatzEintragDto getForTermin(long id) {
+        TerminDto termin = terminMapper.map(terminRepository.findById(id).orElseThrow(() -> new TerminNotFoundException(id)));
+
+        ArbeitseinsatzEintragDto dto = new ArbeitseinsatzEintragDto();
+        dto.setTermin(termin);
+        dto.setMitglied(UserHelper.getAngemeldetesMitglied());
+        dto.setArbeitseinsatzEintragStatus(ArbeitseinsatzEintragStatus.OFFEN);
+
+        return dto;
     }
 }

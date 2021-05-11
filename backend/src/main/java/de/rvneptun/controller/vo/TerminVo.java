@@ -1,40 +1,25 @@
 package de.rvneptun.controller.vo;
 
-import de.rvneptun.controller.dto.ArbeitseinsatzEintragDto;
-import de.rvneptun.controller.dto.MitgliedDto;
-import lombok.*;
+import de.rvneptun.controller.dto.TerminDto;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-import java.time.LocalDateTime;
-import java.util.List;
-
-@Builder
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
-public class TerminVo {
-
-    private long id;
-
-    private String titel;
-
-    private String beschreibung;
-
-    private LocalDateTime datum;
-
-    private LocalDateTime datumBis;
-
-    private List<MitgliedDto> anmeldungen;
+public class TerminVo extends TerminDto {
 
     private String teilnehmerNamen;
-
-    private List<ArbeitseinsatzEintragDto> arbeitsstunden;
-
-    private MitgliedDto organisator;
 
     private boolean mitgliedAngemeldet;
 
     private boolean mitgliedArbeitsstunden;
+
+    private boolean darfBearbeiten;
+
 }
 
 

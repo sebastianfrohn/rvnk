@@ -7,7 +7,7 @@ import org.mapstruct.Mapper;
 
 import java.util.List;
 
-@Mapper(componentModel = "spring", injectionStrategy = InjectionStrategy.CONSTRUCTOR, uses = MitgliedMapper.class)
+@Mapper(componentModel = "spring", injectionStrategy = InjectionStrategy.CONSTRUCTOR, uses = {MitgliedMapper.class, TerminMapper.class})
 public interface ArbeitseinsatzEintragMapper {
 
     ArbeitseinsatzEintrag map(ArbeitseinsatzEintragDto arbeitseinsatzDto);

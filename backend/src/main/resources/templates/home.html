@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="de" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{layouts/layout}" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
-      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+>
 <body>
 
 <div layout:fragment="content">
@@ -10,7 +10,13 @@
             <a th:href="@{termine/}">RVNK Arbeitsstundenmodul</a>
         </li>
         <li>
-            <a th:href="benutzerdaten">Benutzerdaten</a>
+            <a th:href="@{benutzerdaten/}">Benutzerdaten</a>
+        </li>
+        <li>
+            <a th:href="@{arbeitseinsaetze/eigene/}">Eigene Einsätze</a>
+        </li>
+        <li>
+            <a th:href="@{arbeitseinsaetze/einreichungen/}">Angemeldete Einsätze</a>
         </li>
 
     </ul>

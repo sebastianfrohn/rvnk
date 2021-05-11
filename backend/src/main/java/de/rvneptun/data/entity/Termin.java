@@ -23,9 +23,8 @@ public class Termin {
     @Lob
     private String beschreibung;
 
-    private LocalDateTime datum;
+    private LocalDateTime datumVon;
 
-    @Column(name="datumbis")
     private LocalDateTime datumBis;
 
     @ManyToMany
@@ -34,8 +33,10 @@ public class Termin {
     @ManyToMany(fetch = FetchType.LAZY)
     private List<ArbeitseinsatzEintrag> arbeitsstunden;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     private Mitglied organisator;
+
+    private boolean arbeitseinsatz;
 }
 
 

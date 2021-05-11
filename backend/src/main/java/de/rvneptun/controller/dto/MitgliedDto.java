@@ -31,6 +31,7 @@ public class MitgliedDto implements UserDetails {
 
     private String email;
 
+    @Builder.Default
     private List<Rolle> rollen = new ArrayList<>();
 
     @Override
@@ -58,4 +59,17 @@ public class MitgliedDto implements UserDetails {
     public boolean isEnabled() {
         return true;
     }
+
+    public boolean hasRolle(Rolle rolle) {
+        return rollen.contains(rolle);
+    }
+
+    public boolean hasRolle(String rolle) {
+        return rollen.contains(Rolle.valueOf(rolle));
+    }
+
+    public String fullName() {
+        return vorname + " " + name;
+    }
+
 }
