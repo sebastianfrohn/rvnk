@@ -54,7 +54,7 @@ public class MitgliedService {
 
         mitglied.setName(newMitglied.getName());
         mitglied.setVorname(newMitglied.getVorname());
-        mitglied.setEmail(newMitglied.getEmail());
+        mitglied.setUsername(newMitglied.getUsername());
 
         List<Rolle> rollen = newMitglied.getRollen();
         rollen.remove(Rolle.SUPERADMIN);
@@ -95,7 +95,7 @@ public class MitgliedService {
 
     public void sendMail(Mitglied mitglied) {
         SimpleMailMessage msg = new SimpleMailMessage();
-        msg.setTo(mitglied.getEmail());
+        msg.setTo(mitglied.getUsername());
         msg.setFrom(mailabsender);
         msg.setSubject("Registrieren: " + mitglied.getVorname() + "  " + mitglied.getName());
         msg.setText("http://" + host + "/mitglieder/registrieren/setpassword/" + mitglied.getRegistertoken());
@@ -108,7 +108,6 @@ public class MitgliedService {
         Mitglied mitglied = mitgliedMapper.map(mitgliedDto);
         UUID uuid = UUID.randomUUID();
         mitglied.setRegistertoken(uuid.toString());
-        mitglied.setUsername(mitglied.getVorname() + mitglied.getName());
         mitgliedRepository.save(mitglied);
         sendMail(mitglied);
     }

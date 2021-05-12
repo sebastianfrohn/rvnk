@@ -30,9 +30,6 @@ public class Mitglied {
     @Column(length = 64)
     private String password;
 
-    @Column(length = 64)
-    private String email;
-
     @ElementCollection(targetClass = Rolle.class)
     @Enumerated(EnumType.STRING)
     private List<Rolle> rollen;

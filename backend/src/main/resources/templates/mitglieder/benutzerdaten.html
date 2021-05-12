@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="de" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{layouts/layout}" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
-      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+>
 <body>
 
 <div layout:fragment="content">
@@ -10,8 +10,7 @@
         <li><p th:text="'id: ' + ${user.id}"></p></li>
         <li><p th:text="'Name: ' + ${user.name}"></p></li>
         <li><p th:text="'Vorname: ' + ${user.vorname}"></p></li>
-        <li><p th:text="'email: ' + ${user.email}"></p></li>
-        <li><p th:text="'username: ' +${user.username}"></p></li>
+        <li><p th:text="'email: ' + ${user.username}"></p></li>
         <li><p th:text="'rollen: ' + ${user.rollen}"></p></li>
     </ul>
 </div>

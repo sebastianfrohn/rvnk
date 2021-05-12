@@ -29,8 +29,6 @@ public class MitgliedDto implements UserDetails {
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String password;
 
-    private String email;
-
     @Builder.Default
     private List<Rolle> rollen = new ArrayList<>();
 
