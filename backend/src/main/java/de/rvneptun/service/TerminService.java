@@ -25,6 +25,7 @@ import static de.rvneptun.misc.UserHelper.getAngemeldetesMitglied;
 public class TerminService {
 
     private final TerminRepository terminRepository;
+
     private final TerminMapper terminMapper;
 
     public List<TerminDto> findAll() {
@@ -99,4 +100,5 @@ public class TerminService {
 
         return dto;
     }
+
 }

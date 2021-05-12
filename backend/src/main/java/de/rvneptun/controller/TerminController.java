@@ -1,6 +1,5 @@
 package de.rvneptun.controller;
 
-
 import de.rvneptun.dto.TerminDto;
 import de.rvneptun.mapper.TerminMapper;
 import de.rvneptun.mapper.TerminVoMapper;
@@ -8,7 +7,11 @@ import de.rvneptun.service.TerminService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
 
@@ -60,7 +63,6 @@ public class TerminController extends DefaultController {
         return "termine/bearbeiten";
     }
 
-
     @GetMapping("/termin/{id}/bearbeiten")
     public String edit(@PathVariable long id, Model model) {
         model.addAttribute("termin", terminMapper.map(terminService.findById(id)));
@@ -72,6 +74,5 @@ public class TerminController extends DefaultController {
         termin = terminService.save(termin);
         return "redirect:/termine/termin/" + termin.getId();
     }
-
 
 }

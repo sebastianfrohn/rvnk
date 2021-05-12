@@ -20,8 +20,11 @@ import org.springframework.transaction.annotation.Transactional;
 public class MitgliedService {
 
     private final MitgliedRepository mitgliedRepository;
+
     private final MitgliedMapper mitgliedMapper;
+
     private final PasswordEncoder passwordEncoder;
+
     private final JavaMailSender javaMailSender;
 
     @Value("${rvnk.mail.from}")
@@ -75,4 +78,5 @@ public class MitgliedService {
 
         return "redirect:/";
     }
+
 }

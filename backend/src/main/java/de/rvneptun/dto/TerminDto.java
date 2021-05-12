@@ -1,6 +1,10 @@
 package de.rvneptun.dto;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDateTime;
@@ -35,6 +39,7 @@ public class TerminDto {
     private MitgliedDto organisator;
 
     private boolean arbeitseinsatz;
+
 }
 
 

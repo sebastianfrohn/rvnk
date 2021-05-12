@@ -9,7 +9,11 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -22,9 +26,13 @@ public class MitgliedController extends DefaultController {
     // das sollte man noch ändern, geht sicher eleganter...
     @Data
     public final class TokenAndPassword {
+
         private String token;
+
         private String password1;
+
         private String password2;
+
     }
 
     private final MitgliedService mitgliedService;

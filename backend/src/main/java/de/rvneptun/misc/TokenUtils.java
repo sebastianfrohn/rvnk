@@ -9,6 +9,7 @@ import java.util.Random;
 public class TokenUtils {
 
     private static final Charset UTF_8 = StandardCharsets.UTF_8;
+
     private static final String OUTPUT_FORMAT = "%-20s:%s";
 
     public static byte[] digest(byte[] input, String algorithm) {
@@ -42,4 +43,5 @@ public class TokenUtils {
                 .collect(StringBuilder::new, StringBuilder::appendCodePoint, StringBuilder::append)
                 .toString();
     }
+
 }

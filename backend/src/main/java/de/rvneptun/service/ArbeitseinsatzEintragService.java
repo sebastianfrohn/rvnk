@@ -27,8 +27,11 @@ import static de.rvneptun.entity.Rolle.ADMIN;
 public class ArbeitseinsatzEintragService {
 
     private final ArbeitseinsatzEintragRepository arbeitseinsatzEintragRepository;
+
     private final MitgliedRepository mitgliedRepository;
+
     private final TerminRepository terminRepository;
+
     private final ArbeitseinsatzEintragMapper arbeitseinsatzEintragMapper;
 
     public ArbeitseinsatzEintragDto findById(long id) {

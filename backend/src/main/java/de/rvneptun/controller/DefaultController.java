@@ -9,6 +9,7 @@ public abstract class DefaultController {
 
     @ModelAttribute("user")
     public MitgliedDto user() {
-        return  getAngemeldetesMitglied();
+        return getAngemeldetesMitglied();
     }
+
 }

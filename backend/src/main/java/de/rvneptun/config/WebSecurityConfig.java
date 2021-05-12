@@ -17,6 +17,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     private final MitgliederAuthentificationService mitgliederAuthentificationService;
+
     private final PasswordEncoder passwordEncoder;
 
     @Override
@@ -44,8 +45,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         authProvider.setPasswordEncoder(passwordEncoder);
         return authProvider;
     }
-
-
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) {

@@ -20,5 +20,4 @@ public class MvcConfig implements WebMvcConfigurer {
         return new LayoutDialect();
     }
 
-
 }

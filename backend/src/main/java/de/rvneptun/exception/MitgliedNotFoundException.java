@@ -1,6 +1,6 @@
 package de.rvneptun.exception;
 
-public class MitgliedNotFoundException extends  RuntimeException{
+public class MitgliedNotFoundException extends RuntimeException {
 
     private Object id;
 
@@ -10,7 +10,7 @@ public class MitgliedNotFoundException extends  RuntimeException{
 
     @Override
     public String getMessage() {
-        return  "Das Mitglied mit der ID " + id.toString() + " existiert nicht";
+        return "Das Mitglied mit der ID " + id.toString() + " existiert nicht";
     }
 
 }

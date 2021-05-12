@@ -1,11 +1,12 @@
 <!DOCTYPE html>
-<html lang="de" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
+<html lang="de" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="https://www.thymeleaf.org">
 <head>
     <title>RVNK Arbeitsstunden</title>
 </head>
 <body>
 
-<div th:if = "${user} != null">
+<div th:if="${user} != null">
     <span th:text="'Hallo ' + ${user.vorname} +  ' ' + ${user.name}">Hello world!</span>
     <br/>
     <a th:href="@{/logout}">zum Logout</a> |
@@ -13,7 +14,7 @@
     <hr>
 </div>
 
-<div th:if = "${user} == null">
+<div th:if="${user} == null">
     <span>Du bist nicht angemeldet</span>
     <a th:href="@{/login}">zum Login</a>
     <a th:href="@{/mitglieder/registrieren}">registrieren</a>
