@@ -4,6 +4,7 @@ import de.rvneptun.dto.MitgliedDto;
 import de.rvneptun.entity.Mitglied;
 import de.rvneptun.exception.MitgliedNotFoundException;
 import de.rvneptun.mapper.MitgliedMapper;
+import de.rvneptun.misc.TokenUtils;
 import de.rvneptun.repository.MitgliedRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
@@ -12,8 +13,6 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
@@ -51,10 +50,10 @@ public class MitgliedService {
 
     @Transactional
     public void register(MitgliedDto mitgliedDto) {
-        UUID uuid = UUID.randomUUID();
+        String token = TokenUtils.getRandomToken(64);
 
         Mitglied mitglied = mitgliedMapper.map(mitgliedDto);
-        mitglied.setRegistertoken(uuid.toString());
+        mitglied.setRegistertoken(token);
 
         mitgliedRepository.save(mitglied);
 
