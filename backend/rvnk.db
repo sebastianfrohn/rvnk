@@ -1,0 +1,219 @@
+-- MariaDB dump 10.19  Distrib 10.5.10-MariaDB, for Linux (x86_64)
+--
+-- Host: localhost    Database: db_rvnk
+-- ------------------------------------------------------
+-- Server version	10.5.10-MariaDB
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+--
+-- Table structure for table `arbeitseinsatz_eintrag`
+--
+
+DROP TABLE IF EXISTS `arbeitseinsatz_eintrag`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `arbeitseinsatz_eintrag` (
+  `id` bigint(20) NOT NULL,
+  `arbeitseinsatz_eintrag_status` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `datum` datetime DEFAULT NULL,
+  `geleistete_stunden` double DEFAULT NULL,
+  `mitglied_id` bigint(20) DEFAULT NULL,
+  `termin_id` bigint(20) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `FKkom10koaxp5ffjdl680ndw1bh` (`mitglied_id`),
+  KEY `FKqk0l1swoddoo8mrxf0iqie1i8` (`termin_id`),
+  CONSTRAINT `FKkom10koaxp5ffjdl680ndw1bh` FOREIGN KEY (`mitglied_id`) REFERENCES `mitglied` (`id`),
+  CONSTRAINT `FKqk0l1swoddoo8mrxf0iqie1i8` FOREIGN KEY (`termin_id`) REFERENCES `termin` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `arbeitseinsatz_eintrag`
+--
+
+LOCK TABLES `arbeitseinsatz_eintrag` WRITE;
+/*!40000 ALTER TABLE `arbeitseinsatz_eintrag` DISABLE KEYS */;
+INSERT INTO `arbeitseinsatz_eintrag` VALUES (3,'OFFEN',NULL,0.7,1,2);
+/*!40000 ALTER TABLE `arbeitseinsatz_eintrag` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `hibernate_sequence`
+--
+
+DROP TABLE IF EXISTS `hibernate_sequence`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `hibernate_sequence` (
+  `next_val` bigint(20) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `hibernate_sequence`
+--
+
+LOCK TABLES `hibernate_sequence` WRITE;
+/*!40000 ALTER TABLE `hibernate_sequence` DISABLE KEYS */;
+INSERT INTO `hibernate_sequence` VALUES (5);
+/*!40000 ALTER TABLE `hibernate_sequence` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `mitglied`
+--
+
+DROP TABLE IF EXISTS `mitglied`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `mitglied` (
+  `id` bigint(20) NOT NULL,
+  `name` varchar(64) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `password` varchar(64) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `registertoken` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `username` varchar(128) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `vorname` varchar(64) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `UK_1ahiem31pwi0cgcispp4v25cy` (`username`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `mitglied`
+--
+
+LOCK TABLES `mitglied` WRITE;
+/*!40000 ALTER TABLE `mitglied` DISABLE KEYS */;
+INSERT INTO `mitglied` VALUES (1,'Admin','$2a$10$nJzC7NScaSF7eElz/IGEauD2/SWmpFLRTz13jFHgEE3K.R.irn8IG',NULL,'admin@example.com','Admin');
+/*!40000 ALTER TABLE `mitglied` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `mitglied_rollen`
+--
+
+DROP TABLE IF EXISTS `mitglied_rollen`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `mitglied_rollen` (
+  `mitglied_id` bigint(20) NOT NULL,
+  `rollen` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  KEY `FK8h2wbrmm0teds4n7d4wi4p0lw` (`mitglied_id`),
+  CONSTRAINT `FK8h2wbrmm0teds4n7d4wi4p0lw` FOREIGN KEY (`mitglied_id`) REFERENCES `mitglied` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `mitglied_rollen`
+--
+
+LOCK TABLES `mitglied_rollen` WRITE;
+/*!40000 ALTER TABLE `mitglied_rollen` DISABLE KEYS */;
+INSERT INTO `mitglied_rollen` VALUES (1,'ADMIN'),(1,'ORGANISATOR');
+/*!40000 ALTER TABLE `mitglied_rollen` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `termin`
+--
+
+DROP TABLE IF EXISTS `termin`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `termin` (
+  `id` bigint(20) NOT NULL,
+  `arbeitseinsatz` bit(1) NOT NULL,
+  `beschreibung` longtext COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `datum_bis` datetime DEFAULT NULL,
+  `datum_von` datetime DEFAULT NULL,
+  `titel` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `organisator_id` bigint(20) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `FKes2ebcyin2md5nc79bh73wdi8` (`organisator_id`),
+  CONSTRAINT `FKes2ebcyin2md5nc79bh73wdi8` FOREIGN KEY (`organisator_id`) REFERENCES `mitglied` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `termin`
+--
+
+LOCK TABLES `termin` WRITE;
+/*!40000 ALTER TABLE `termin` DISABLE KEYS */;
+INSERT INTO `termin` VALUES (2,'','Das ist ein neuer Termin','2021-05-22 22:25:00','2021-05-15 22:25:00','Termin 1',1),(4,'','Das ist ein neuer Termin 2','2021-05-28 22:26:00','2021-05-15 22:26:00','Termin 2',1);
+/*!40000 ALTER TABLE `termin` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `termin_anmeldungen`
+--
+
+DROP TABLE IF EXISTS `termin_anmeldungen`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `termin_anmeldungen` (
+  `termin_id` bigint(20) NOT NULL,
+  `anmeldungen_id` bigint(20) NOT NULL,
+  KEY `FKipyiy1udamnnxvq2qv9njpgn0` (`anmeldungen_id`),
+  KEY `FK5khm9kpdj3buc3i0r73dgql5k` (`termin_id`),
+  CONSTRAINT `FK5khm9kpdj3buc3i0r73dgql5k` FOREIGN KEY (`termin_id`) REFERENCES `termin` (`id`),
+  CONSTRAINT `FKipyiy1udamnnxvq2qv9njpgn0` FOREIGN KEY (`anmeldungen_id`) REFERENCES `mitglied` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `termin_anmeldungen`
+--
+
+LOCK TABLES `termin_anmeldungen` WRITE;
+/*!40000 ALTER TABLE `termin_anmeldungen` DISABLE KEYS */;
+INSERT INTO `termin_anmeldungen` VALUES (2,1);
+/*!40000 ALTER TABLE `termin_anmeldungen` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `termin_arbeitsstunden`
+--
+
+DROP TABLE IF EXISTS `termin_arbeitsstunden`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `termin_arbeitsstunden` (
+  `termin_id` bigint(20) NOT NULL,
+  `arbeitsstunden_id` bigint(20) NOT NULL,
+  KEY `FKnt8tkhmvfuen7r4j70ncwpfrp` (`arbeitsstunden_id`),
+  KEY `FKcmqkufm6qx49qqnr96y3aomwt` (`termin_id`),
+  CONSTRAINT `FKcmqkufm6qx49qqnr96y3aomwt` FOREIGN KEY (`termin_id`) REFERENCES `termin` (`id`),
+  CONSTRAINT `FKnt8tkhmvfuen7r4j70ncwpfrp` FOREIGN KEY (`arbeitsstunden_id`) REFERENCES `arbeitseinsatz_eintrag` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `termin_arbeitsstunden`
+--
+
+LOCK TABLES `termin_arbeitsstunden` WRITE;
+/*!40000 ALTER TABLE `termin_arbeitsstunden` DISABLE KEYS */;
+/*!40000 ALTER TABLE `termin_arbeitsstunden` ENABLE KEYS */;
+UNLOCK TABLES;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+-- Dump completed on 2021-05-12 22:26:55
