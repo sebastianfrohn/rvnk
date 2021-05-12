@@ -12,15 +12,12 @@ import java.util.List;
 public interface MitgliedMapper {
 
     @Mapping(target = "registertoken", ignore = true)
-    @Mapping(target = "username", source = "username", ignore = true)
     Mitglied map(MitgliedDto MitgliedDto);
 
     @Mapping(target = "authorities", ignore = true)
-    @Mapping(target = "username", ignore = true)
     MitgliedDto map(Mitglied Verantwortlicher);
 
     @Mapping(target = "authorities", ignore = true)
-    @Mapping(target = "username", ignore = true)
     List<MitgliedDto> map(List<Mitglied> list);
 
 }
