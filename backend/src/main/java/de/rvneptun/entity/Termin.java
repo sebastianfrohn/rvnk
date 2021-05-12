@@ -1,5 +1,6 @@
 package de.rvneptun.entity;
 
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -11,6 +12,7 @@ import java.util.List;
 @Entity
 @NoArgsConstructor
 @Getter
+@EqualsAndHashCode(of = "id")
 @Setter
 public class Termin {
 

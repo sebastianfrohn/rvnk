@@ -1,4 +1,4 @@
-package de.rvneptun.controller.web;
+package de.rvneptun.controller;
 
 import de.rvneptun.dto.MitgliedDto;
 import org.springframework.web.bind.annotation.ModelAttribute;

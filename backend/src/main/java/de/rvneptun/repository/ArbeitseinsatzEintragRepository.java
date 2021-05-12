@@ -12,7 +12,7 @@ public interface ArbeitseinsatzEintragRepository extends JpaRepository<Arbeitsei
     List<ArbeitseinsatzEintrag> findAllByOrganisatorId(long id);
 
     @Query("select e from ArbeitseinsatzEintrag e left join e.mitglied m where m.id = ?1")
-    List<ArbeitseinsatzEintrag> findAllByArbeiterId(long id);
+    List<ArbeitseinsatzEintrag> findAllByMitgliedId(long id);
 
 }
 

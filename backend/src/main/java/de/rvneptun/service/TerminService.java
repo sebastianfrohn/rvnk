@@ -3,12 +3,12 @@ package de.rvneptun.service;
 import de.rvneptun.dto.ArbeitseinsatzEintragDto;
 import de.rvneptun.dto.MitgliedDto;
 import de.rvneptun.dto.TerminDto;
+import de.rvneptun.entity.ArbeitseinsatzEintragStatus;
 import de.rvneptun.entity.Mitglied;
 import de.rvneptun.entity.Termin;
 import de.rvneptun.exception.ForbiddenException;
 import de.rvneptun.exception.TerminNotFoundException;
 import de.rvneptun.mapper.TerminMapper;
-import de.rvneptun.misc.ArbeitseinsatzEintragStatus;
 import de.rvneptun.repository.TerminRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -29,29 +29,6 @@ public class TerminService {
 
     public List<TerminDto> findAll() {
         return terminMapper.map(terminRepository.findAll());
-    }
-
-    @Transactional
-    public Long add(TerminDto element) {
-        return terminRepository.save(terminMapper.map(element)).getId();
-    }
-
-    @Transactional
-    public Long update(Long id, TerminDto TerminDto) {
-        Termin Termin = terminRepository
-                .findById(id)
-                .orElseThrow(() -> new TerminNotFoundException(id));
-
-        Termin newTermin = terminMapper.map(TerminDto);
-
-        Termin.setBeschreibung(newTermin.getBeschreibung());
-
-        return id;
-    }
-
-    @Transactional
-    public void delete(Long id) {
-        terminRepository.deleteById(id);
     }
 
     public TerminDto findById(long id) {

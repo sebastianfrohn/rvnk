@@ -1,6 +1,6 @@
 package de.rvneptun.entity;
 
-import de.rvneptun.misc.ArbeitseinsatzEintragStatus;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -9,6 +9,7 @@ import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
+@EqualsAndHashCode(of = "id")
 @NoArgsConstructor
 @Getter
 @Setter

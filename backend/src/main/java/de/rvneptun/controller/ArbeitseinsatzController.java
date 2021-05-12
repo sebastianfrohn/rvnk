@@ -1,4 +1,4 @@
-package de.rvneptun.controller.web;
+package de.rvneptun.controller;
 
 
 import de.rvneptun.dto.ArbeitseinsatzEintragDto;
@@ -27,7 +27,7 @@ public class ArbeitseinsatzController extends DefaultController {
 
     @GetMapping("/eigene")
     public String zeigeEigeneEintraege(Model model) {
-        List<ArbeitseinsatzEintrag> eintraege = service.findAllByArbeiterId(getAngemeldetesMitglied().getId());
+        List<ArbeitseinsatzEintrag> eintraege = service.findAllByMitgliedId(getAngemeldetesMitglied().getId());
         List<ArbeitseinsatzEintragDto> eintraegeDto = eintragMapper.mapReverse(eintraege);
 
         model.addAttribute("titel", "Eigene angemeldete Arbeitseinsätze");

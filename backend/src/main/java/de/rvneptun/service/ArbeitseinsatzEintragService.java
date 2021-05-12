@@ -3,12 +3,11 @@ package de.rvneptun.service;
 import de.rvneptun.dto.ArbeitseinsatzEintragDto;
 import de.rvneptun.dto.MitgliedDto;
 import de.rvneptun.entity.ArbeitseinsatzEintrag;
-import de.rvneptun.exception.ArbeitseinsatzEintragException;
+import de.rvneptun.entity.ArbeitseinsatzEintragStatus;
 import de.rvneptun.exception.ForbiddenException;
 import de.rvneptun.exception.MitgliedNotFoundException;
 import de.rvneptun.exception.TerminNotFoundException;
 import de.rvneptun.mapper.ArbeitseinsatzEintragMapper;
-import de.rvneptun.misc.ArbeitseinsatzEintragStatus;
 import de.rvneptun.misc.UserHelper;
 import de.rvneptun.repository.ArbeitseinsatzEintragRepository;
 import de.rvneptun.repository.MitgliedRepository;
@@ -32,46 +31,12 @@ public class ArbeitseinsatzEintragService {
     private final TerminRepository terminRepository;
     private final ArbeitseinsatzEintragMapper arbeitseinsatzEintragMapper;
 
-
-    public List<ArbeitseinsatzEintragDto> findAll() {
-        return arbeitseinsatzEintragMapper.mapReverse(arbeitseinsatzEintragRepository.findAll());
-    }
-
     public ArbeitseinsatzEintragDto findById(long id) {
         return arbeitseinsatzEintragMapper.mapReverse(arbeitseinsatzEintragRepository.findById(id).orElseThrow(EntityNotFoundException::new));
     }
 
-    @Transactional
-    public Long add(ArbeitseinsatzEintragDto element) {
-        return arbeitseinsatzEintragRepository.save(arbeitseinsatzEintragMapper.map(element)).getId();
-    }
-
-    @Transactional
-    public Long update(Long id, ArbeitseinsatzEintragDto arbeitseinsatzEintragDto) {
-        ArbeitseinsatzEintrag arbeitseinsatz = arbeitseinsatzEintragRepository
-                .findById(id)
-                .orElseThrow(() -> new ArbeitseinsatzEintragException(id));
-
-        ArbeitseinsatzEintrag newArbeitseinsatzEintrag = arbeitseinsatzEintragMapper.map(arbeitseinsatzEintragDto);
-
-        arbeitseinsatz.setGeleisteteStunden(newArbeitseinsatzEintrag.getGeleisteteStunden());
-        arbeitseinsatz.setDatum(newArbeitseinsatzEintrag.getDatum());
-
-        return id;
-    }
-
-    public void delete(Long id) {
-        arbeitseinsatzEintragRepository.deleteById(id);
-    }
-
-    public ArbeitseinsatzEintragDto find(Long id) {
-        return arbeitseinsatzEintragMapper.mapReverse(
-                arbeitseinsatzEintragRepository.findById(id).orElseThrow(() -> new ArbeitseinsatzEintragException(id))
-        );
-    }
-
-    public List<ArbeitseinsatzEintrag> findAllByArbeiterId(Long id) {
-        return arbeitseinsatzEintragRepository.findAllByArbeiterId(id);
+    public List<ArbeitseinsatzEintrag> findAllByMitgliedId(Long id) {
+        return arbeitseinsatzEintragRepository.findAllByMitgliedId(id);
     }
 
     public List<ArbeitseinsatzEintrag> findAllByOrganisatorId(Long id) {
@@ -87,8 +52,10 @@ public class ArbeitseinsatzEintragService {
         Long mitgliedId = dto.getMitglied().getId();
         long terminId = dto.getTermin().getId();
 
-        eintrag.setMitglied(mitgliedRepository.findById(mitgliedId).orElseThrow(() -> new MitgliedNotFoundException(mitgliedId)));
-        eintrag.setTermin(terminRepository.findById(terminId).orElseThrow(() -> new TerminNotFoundException(terminId)));
+        eintrag.setMitglied(mitgliedRepository.findById(mitgliedId)
+                .orElseThrow(() -> new MitgliedNotFoundException(mitgliedId)));
+        eintrag.setTermin(terminRepository.findById(terminId)
+                .orElseThrow(() -> new TerminNotFoundException(terminId)));
 
         eintrag.setArbeitseinsatzEintragStatus(ArbeitseinsatzEintragStatus.OFFEN);
 
@@ -98,7 +65,8 @@ public class ArbeitseinsatzEintragService {
     private ArbeitseinsatzEintrag getEintragAndPruefeRechte(long id) {
         MitgliedDto angemeldetesMitglied = UserHelper.getAngemeldetesMitglied();
 
-        ArbeitseinsatzEintrag einsatz = arbeitseinsatzEintragRepository.findById(id).orElseGet(ArbeitseinsatzEintrag::new);
+        ArbeitseinsatzEintrag einsatz = arbeitseinsatzEintragRepository.findById(id)
+                .orElseGet(ArbeitseinsatzEintrag::new);
 
         if (einsatz.getId() != 0 && isOrganisator(angemeldetesMitglied, einsatz) && angemeldetesMitglied.hasRolle(ADMIN)) {
             throw new ForbiddenException();
@@ -109,4 +77,5 @@ public class ArbeitseinsatzEintragService {
     private boolean isOrganisator(MitgliedDto angemeldetesMitglied, ArbeitseinsatzEintrag einsatz) {
         return einsatz.getTermin().getOrganisator().getId() != angemeldetesMitglied.getId();
     }
+
 }

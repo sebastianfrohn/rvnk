@@ -1,4 +1,4 @@
-package de.rvneptun.misc;
+package de.rvneptun.entity;
 
 public enum ArbeitseinsatzEintragStatus {
     OFFEN,
