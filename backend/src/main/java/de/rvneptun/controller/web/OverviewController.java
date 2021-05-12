@@ -19,11 +19,6 @@ public class OverviewController extends DefaultController {
         return "home";
     }
 
-    @Secured("ANGEMELDET")
-    @GetMapping("/benutzerdaten")
-    public String hello(Model model) {
-        return "mitglieder/benutzerdaten";
-    }
 
     @Secured("ANGEMELDET")
     @GetMapping("/logout")

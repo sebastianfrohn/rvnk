@@ -1,9 +1,9 @@
 package de.rvneptun.controller.web;
 
 
-import de.rvneptun.controller.dto.ArbeitseinsatzEintragDto;
-import de.rvneptun.data.entity.ArbeitseinsatzEintrag;
-import de.rvneptun.data.mapper.ArbeitseinsatzEintragMapper;
+import de.rvneptun.dto.ArbeitseinsatzEintragDto;
+import de.rvneptun.entity.ArbeitseinsatzEintrag;
+import de.rvneptun.mapper.ArbeitseinsatzEintragMapper;
 import de.rvneptun.service.ArbeitseinsatzEintragService;
 import de.rvneptun.service.TerminService;
 import lombok.RequiredArgsConstructor;

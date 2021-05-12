@@ -1,6 +1,6 @@
 package de.rvneptun.controller.rest;
 
-import de.rvneptun.controller.dto.TerminDto;
+import de.rvneptun.dto.TerminDto;
 import de.rvneptun.service.TerminService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

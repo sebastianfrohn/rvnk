@@ -1,6 +1,6 @@
 package de.rvneptun.controller.web;
 
-import de.rvneptun.controller.dto.MitgliedDto;
+import de.rvneptun.dto.MitgliedDto;
 import org.springframework.web.bind.annotation.ModelAttribute;
 
 import static de.rvneptun.misc.UserHelper.getAngemeldetesMitglied;

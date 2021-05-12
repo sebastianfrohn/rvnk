@@ -1,9 +1,9 @@
 package de.rvneptun.controller.web;
 
 
-import de.rvneptun.controller.dto.TerminDto;
-import de.rvneptun.data.mapper.TerminMapper;
-import de.rvneptun.data.mapper.TerminVoMapper;
+import de.rvneptun.dto.TerminDto;
+import de.rvneptun.mapper.TerminMapper;
+import de.rvneptun.mapper.TerminVoMapper;
 import de.rvneptun.service.TerminService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -54,9 +54,9 @@ public class TerminController extends DefaultController {
         return "redirect:/termine/";
     }
 
-    @GetMapping("/termin/{id}/erstellen")
-    public String erstellen(@PathVariable long id, Model model) {
-        model.addAttribute("termin", terminService.getForTermin(id));
+    @GetMapping("/termin/erstellen")
+    public String erstellen(Model model) {
+        model.addAttribute("termin", new TerminDto());
         return "termine/bearbeiten";
     }
 

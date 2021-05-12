@@ -1,6 +1,6 @@
 package de.rvneptun.misc;
 
-import de.rvneptun.controller.dto.MitgliedDto;
+import de.rvneptun.dto.MitgliedDto;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;

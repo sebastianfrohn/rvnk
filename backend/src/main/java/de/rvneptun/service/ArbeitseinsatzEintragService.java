@@ -1,18 +1,18 @@
 package de.rvneptun.service;
 
-import de.rvneptun.controller.dto.ArbeitseinsatzEintragDto;
-import de.rvneptun.controller.dto.MitgliedDto;
-import de.rvneptun.data.entity.ArbeitseinsatzEintrag;
-import de.rvneptun.data.mapper.ArbeitseinsatzEintragMapper;
-import de.rvneptun.data.repository.ArbeitseinsatzEintragRepository;
-import de.rvneptun.data.repository.MitgliedRepository;
-import de.rvneptun.data.repository.TerminRepository;
+import de.rvneptun.dto.ArbeitseinsatzEintragDto;
+import de.rvneptun.dto.MitgliedDto;
+import de.rvneptun.entity.ArbeitseinsatzEintrag;
+import de.rvneptun.exception.ArbeitseinsatzEintragException;
+import de.rvneptun.exception.ForbiddenException;
+import de.rvneptun.exception.MitgliedNotFoundException;
+import de.rvneptun.exception.TerminNotFoundException;
+import de.rvneptun.mapper.ArbeitseinsatzEintragMapper;
 import de.rvneptun.misc.ArbeitseinsatzEintragStatus;
 import de.rvneptun.misc.UserHelper;
-import de.rvneptun.misc.exception.ArbeitseinsatzEintragException;
-import de.rvneptun.misc.exception.ForbiddenException;
-import de.rvneptun.misc.exception.MitgliedNotFoundException;
-import de.rvneptun.misc.exception.TerminNotFoundException;
+import de.rvneptun.repository.ArbeitseinsatzEintragRepository;
+import de.rvneptun.repository.MitgliedRepository;
+import de.rvneptun.repository.TerminRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -20,7 +20,7 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.persistence.EntityNotFoundException;
 import java.util.List;
 
-import static de.rvneptun.data.entity.Rolle.ADMIN;
+import static de.rvneptun.entity.Rolle.ADMIN;
 
 @Service
 @RequiredArgsConstructor

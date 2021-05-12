@@ -14,8 +14,9 @@
 </div>
 
 <div th:if = "${user} == null">
-    <span>Du bist nicht ROLE_ANGEMELDET</span>
+    <span>Du bist nicht angemeldet</span>
     <a th:href="@{/login}">zum Login</a>
+    <a th:href="@{/mitglieder/registrieren}">registrieren</a>
 </div>
 
 

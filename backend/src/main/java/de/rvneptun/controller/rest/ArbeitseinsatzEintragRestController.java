@@ -1,6 +1,6 @@
 package de.rvneptun.controller.rest;
 
-import de.rvneptun.controller.dto.ArbeitseinsatzEintragDto;
+import de.rvneptun.dto.ArbeitseinsatzEintragDto;
 import de.rvneptun.service.ArbeitseinsatzEintragService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

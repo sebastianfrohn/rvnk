@@ -1,23 +1,23 @@
 package de.rvneptun.service;
 
-import de.rvneptun.controller.dto.ArbeitseinsatzEintragDto;
-import de.rvneptun.controller.dto.MitgliedDto;
-import de.rvneptun.controller.dto.TerminDto;
-import de.rvneptun.data.entity.Mitglied;
-import de.rvneptun.data.entity.Termin;
-import de.rvneptun.data.mapper.TerminMapper;
-import de.rvneptun.data.repository.TerminRepository;
+import de.rvneptun.dto.ArbeitseinsatzEintragDto;
+import de.rvneptun.dto.MitgliedDto;
+import de.rvneptun.dto.TerminDto;
+import de.rvneptun.entity.Mitglied;
+import de.rvneptun.entity.Termin;
+import de.rvneptun.exception.ForbiddenException;
+import de.rvneptun.exception.TerminNotFoundException;
+import de.rvneptun.mapper.TerminMapper;
 import de.rvneptun.misc.ArbeitseinsatzEintragStatus;
-import de.rvneptun.misc.UserHelper;
-import de.rvneptun.misc.exception.ForbiddenException;
-import de.rvneptun.misc.exception.TerminNotFoundException;
+import de.rvneptun.repository.TerminRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
-import static de.rvneptun.data.entity.Rolle.ADMIN;
+import static de.rvneptun.entity.Rolle.ADMIN;
+import static de.rvneptun.misc.UserHelper.getAngemeldetesMitglied;
 
 @Service
 @RequiredArgsConstructor
@@ -61,14 +61,14 @@ public class TerminService {
     @Transactional
     public void anmelden(long id) {
         Termin termin = terminRepository.findById(id).orElseThrow(() -> new TerminNotFoundException(id));
-        Long userId = UserHelper.getAngemeldetesMitglied().getId();
+        Long userId = getAngemeldetesMitglied().getId();
         termin.getAnmeldungen().add(Mitglied.builder().id(userId).build());
     }
 
     @Transactional
     public void abmelden(long id) {
         Termin termin = terminRepository.findById(id).orElseThrow(() -> new TerminNotFoundException(id));
-        Long userId = UserHelper.getAngemeldetesMitglied().getId();
+        Long userId = getAngemeldetesMitglied().getId();
         termin.getAnmeldungen().remove(Mitglied.builder().id(userId).build());
     }
 
@@ -89,15 +89,16 @@ public class TerminService {
         termin.setArbeitseinsatz(neuerTermin.isArbeitseinsatz());
         termin.setDatumVon(neuerTermin.getDatumVon());
         termin.setDatumBis(neuerTermin.getDatumBis());
+
         if (termin.getOrganisator() == null) {
-            termin.setOrganisator(Mitglied.builder().id(UserHelper.getAngemeldetesMitglied().getId()).build());
+            termin.setOrganisator(Mitglied.builder().id(getAngemeldetesMitglied().getId()).build());
         }
 
         return terminMapper.map(terminRepository.save(termin));
     }
 
     private Termin getTerminAndPruefeRechte(long id) {
-        MitgliedDto angemeldetesMitglied = UserHelper.getAngemeldetesMitglied();
+        MitgliedDto angemeldetesMitglied = getAngemeldetesMitglied();
 
         Termin termin = terminRepository.findById(id).orElseGet(Termin::new);
 
@@ -116,7 +117,7 @@ public class TerminService {
 
         ArbeitseinsatzEintragDto dto = new ArbeitseinsatzEintragDto();
         dto.setTermin(termin);
-        dto.setMitglied(UserHelper.getAngemeldetesMitglied());
+        dto.setMitglied(getAngemeldetesMitglied());
         dto.setArbeitseinsatzEintragStatus(ArbeitseinsatzEintragStatus.OFFEN);
 
         return dto;

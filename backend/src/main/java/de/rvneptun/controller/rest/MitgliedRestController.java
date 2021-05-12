@@ -1,6 +1,6 @@
 package de.rvneptun.controller.rest;
 
-import de.rvneptun.controller.dto.MitgliedDto;
+import de.rvneptun.dto.MitgliedDto;
 import de.rvneptun.service.MitgliedService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.transaction.annotation.Transactional;

@@ -15,15 +15,16 @@ repositories {
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-data-jdbc'
     implementation 'org.springframework.boot:spring-boot-starter-web'
-    implementation 'org.springframework.boot:spring-boot-starter-actuator'
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
     implementation 'org.springframework.boot:spring-boot-starter-security'
     implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
-    implementation 'nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect'
-    implementation "org.mapstruct:mapstruct:1.4.2.Final"
+    implementation 'org.springframework.boot:spring-boot-starter-mail'
 
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
 
+    implementation 'nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect'
+
+    compileOnly "org.mapstruct:mapstruct:1.4.2.Final"
     compileOnly 'org.projectlombok:lombok:1.18.20'
 
     annotationProcessor 'org.projectlombok:lombok:1.18.20'
@@ -32,7 +33,6 @@ dependencies {
     runtimeOnly 'mysql:mysql-connector-java'
 
     testImplementation('org.springframework.boot:spring-boot-starter-test')
-
 }
 
 tasks.withType(JavaCompile) {
