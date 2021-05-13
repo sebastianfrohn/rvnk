@@ -13,5 +13,6 @@ public interface MitgliedRepository extends JpaRepository<Mitglied, Long> {
     @Query("select m from Mitglied m where m.registertoken = ?1")
     Optional<Mitglied> findOneByRegistertoken(String token);
 
+    boolean existsMitgliedByUsername(String username);
 }
 

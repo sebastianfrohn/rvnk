@@ -1,6 +1,5 @@
 package de.rvneptun.controller;
 
-import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
@@ -19,7 +18,6 @@ public class OverviewController extends DefaultController {
         return "home";
     }
 
-    @Secured("ANGEMELDET")
     @GetMapping("/logout")
     public String logoutPage(HttpServletRequest request, HttpServletResponse response) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();

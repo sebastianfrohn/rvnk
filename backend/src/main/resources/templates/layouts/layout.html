@@ -20,6 +20,9 @@
     <a th:href="@{/mitglieder/registrieren}">registrieren</a>
 </div>
 
+<div th:if="${error != null}">
+    <span th:text="${'Fehler: ' + error}"></span>
+</div>
 
 <div layout:fragment="content">
     <p>Body contents</p>
