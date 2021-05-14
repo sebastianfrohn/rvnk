@@ -1,9 +1,23 @@
 package de.rvneptun.entity;
 
-import lombok.*;
+import de.rvneptun.enums.Rolle;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.ElementCollection;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import java.util.List;
+
+import static javax.persistence.GenerationType.IDENTITY;
 
 @Entity
 @Builder
@@ -15,7 +29,7 @@ import java.util.List;
 public class Mitglied {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = IDENTITY)
     private long id;
 
     @Column(length = 128, nullable = false, unique = true)

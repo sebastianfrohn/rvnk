@@ -3,9 +3,9 @@ package de.rvneptun.service;
 import de.rvneptun.dto.ArbeitseinsatzEintragDto;
 import de.rvneptun.dto.MitgliedDto;
 import de.rvneptun.dto.TerminDto;
-import de.rvneptun.entity.ArbeitseinsatzEintragStatus;
 import de.rvneptun.entity.Mitglied;
 import de.rvneptun.entity.Termin;
+import de.rvneptun.enums.ArbeitseinsatzEintragStatus;
 import de.rvneptun.exception.ForbiddenException;
 import de.rvneptun.exception.TerminNotFoundException;
 import de.rvneptun.mapper.TerminMapper;
@@ -16,7 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
-import static de.rvneptun.entity.Rolle.ADMIN;
+import static de.rvneptun.enums.Rolle.ADMIN;
 import static de.rvneptun.misc.UserHelper.getAngemeldetesMitglied;
 
 @Service

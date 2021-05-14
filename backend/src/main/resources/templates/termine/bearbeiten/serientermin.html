@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="de" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/layout}" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
+>
+<body>
+
+<div layout:fragment="content">
+    <div>
+        <h1>Termin bearbeiten</h1>
+        <form action="#" th:action="@{/termine/termin}" method="post" th:object="${termin}">
+            <label>Titel</label>
+            <input type="text" th:field="*{titel}"/><br/>
+
+            <label>Beschreibung:</label>
+            <input type="text" th:field="*{beschreibung}"/><br/>
+
+            <label>Erster Termin:</label>
+            <input type="date" th:field="*{datumVon}"/><br/>
+
+            <label>Letzter Termin:</label>
+            <input type="date" th:field="*{datumBis}"/><br/>
+
+            <label>Wochentag:</label>
+            <select th:field="*{wochentag}">
+                <option th:each="i : ${#numbers.sequence(0, 100)}" th:value="${i}" th:text="${i}"
+                        th:selected="${i==75}"></option>
+            </select>
+
+
+            <label>arbeitseinsatz:</label>
+            <input type="checkbox" th:field="*{arbeitseinsatz}" value="dieser Termin ist ein Arbeitseinsatz"/>dieser
+            Termin ist ein Arbeitseinsatz
+
+            <br/>
+            <button type="submit">Speichern</button>
+        </form>
+    </div>
+</div>
+
+
+</body>
+</html>

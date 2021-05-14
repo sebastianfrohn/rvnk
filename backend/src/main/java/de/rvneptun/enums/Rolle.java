@@ -1,8 +1,9 @@
-package de.rvneptun.entity;
+package de.rvneptun.enums;
 
 import org.springframework.security.core.GrantedAuthority;
 
-public enum Rolle implements GrantedAuthority {
+public enum
+Rolle implements GrantedAuthority {
     ANGEMELDET,
     MITGLIED,
     ORGANISATOR,
@@ -10,7 +11,8 @@ public enum Rolle implements GrantedAuthority {
     SUPERADMIN;
 
     @Override
-    public String getAuthority() {
+    public String getAuthority()
+    {
         return this.name();
     }
 }

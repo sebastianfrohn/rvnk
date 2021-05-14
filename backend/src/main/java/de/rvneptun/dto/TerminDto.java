@@ -1,5 +1,7 @@
 package de.rvneptun.dto;
 
+import de.rvneptun.enums.TerminTyp;
+import de.rvneptun.enums.Wochentag;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -29,6 +31,12 @@ public class TerminDto {
 
     @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
     private LocalDateTime datumBis;
+
+    private Wochentag wochentag;
+
+    private TerminTyp terminTyp;
+
+    private int maxTeilnehmer;
 
     @Builder.Default
     private List<MitgliedDto> anmeldungen = new ArrayList<>();

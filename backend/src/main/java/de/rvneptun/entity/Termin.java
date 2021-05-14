@@ -1,20 +1,25 @@
 package de.rvneptun.entity;
 
+import de.rvneptun.enums.TerminTyp;
+import de.rvneptun.enums.Wochentag;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import java.time.LocalDateTime;
 import java.util.List;
+
+import static javax.persistence.GenerationType.IDENTITY;
 
 @Entity
 @NoArgsConstructor
@@ -24,7 +29,7 @@ import java.util.List;
 public class Termin {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = IDENTITY)
     private long id;
 
     private String titel;
@@ -35,6 +40,14 @@ public class Termin {
     private LocalDateTime datumVon;
 
     private LocalDateTime datumBis;
+
+    @Enumerated(EnumType.STRING)
+    private Wochentag wochentag;
+
+    @Enumerated(EnumType.STRING)
+    private TerminTyp terminTyp;
+
+    private int maxTeilnehmer;
 
     @ManyToMany
     private List<Mitglied> anmeldungen;

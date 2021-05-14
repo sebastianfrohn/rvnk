@@ -3,7 +3,7 @@ package de.rvneptun.mapper;
 import de.rvneptun.dto.ArbeitseinsatzEintragDto;
 import de.rvneptun.dto.MitgliedDto;
 import de.rvneptun.dto.TerminDto;
-import de.rvneptun.entity.Rolle;
+import de.rvneptun.enums.Rolle;
 import de.rvneptun.misc.UserHelper;
 import de.rvneptun.vo.TerminVo;
 import org.mapstruct.InjectionStrategy;

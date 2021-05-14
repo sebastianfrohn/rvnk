@@ -1,6 +1,6 @@
 package de.rvneptun.dto;
 
-import de.rvneptun.entity.ArbeitseinsatzEintragStatus;
+import de.rvneptun.enums.ArbeitseinsatzEintragStatus;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

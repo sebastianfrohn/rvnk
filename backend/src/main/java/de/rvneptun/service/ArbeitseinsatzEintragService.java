@@ -3,7 +3,7 @@ package de.rvneptun.service;
 import de.rvneptun.dto.ArbeitseinsatzEintragDto;
 import de.rvneptun.dto.MitgliedDto;
 import de.rvneptun.entity.ArbeitseinsatzEintrag;
-import de.rvneptun.entity.ArbeitseinsatzEintragStatus;
+import de.rvneptun.enums.ArbeitseinsatzEintragStatus;
 import de.rvneptun.exception.ForbiddenException;
 import de.rvneptun.exception.MitgliedNotFoundException;
 import de.rvneptun.exception.TerminNotFoundException;
@@ -19,7 +19,7 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.persistence.EntityNotFoundException;
 import java.util.List;
 
-import static de.rvneptun.entity.Rolle.ADMIN;
+import static de.rvneptun.enums.Rolle.ADMIN;
 
 @Service
 @RequiredArgsConstructor
